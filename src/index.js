@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 const routes = require('./routes');
+const db = require('./config/db');
+
+// connect db
+db.connect();
 
 app.use(express.static(path.join(__dirname,'public'))); // static file
 
@@ -26,4 +30,4 @@ app.set('views',path.join(__dirname,'resources','views'));
 routes(app);
 
 
-app.listen(port,() => console.log(`run`));
+app.listen(port,() => console.log(`Run server`));
