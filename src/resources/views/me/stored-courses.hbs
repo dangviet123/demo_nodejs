@@ -1,0 +1,27 @@
+<div class="content-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Ngày lập</th>
+                <th scope="col">Ngày cập nhật</th>
+                <th scope="col">Tác vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each datas}}
+            <tr>
+                <th scope="row">{{viewIndex @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>{{this.updatedAt}}</td>
+                <td align="center">
+                    <a href="/courses/{{this._id}}/edit" class="badge badge-primary">Chỉnh sửa</a>
+                    <a href="/courses/{{this._id}}/delete" class="badge badge-danger">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -3,6 +3,6 @@ module.exports = {
         return datas ? datas.map(data => data.toObject()) : "";
     },
     resultToObject: (data) => {
-        return datas ? data.toObject() : "";
+        return data ? data.toObject() : "";
     }
 };

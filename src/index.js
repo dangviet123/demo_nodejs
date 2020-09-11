@@ -22,7 +22,14 @@ app.use(bodyParser.json());
 app.use(morgan('combined'));
 
 // Teample engine
-app.engine('hbs', exphbs({extname:'.hbs'}));
+app.engine('hbs', 
+    exphbs({
+        extname:'.hbs',
+        helpers: {
+            viewIndex: (a,b) => a+b,
+        }
+    })
+);
 app.set('view engine', 'hbs');
 app.set('views',path.join(__dirname,'resources','views'));
 
