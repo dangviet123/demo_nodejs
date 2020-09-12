@@ -32,8 +32,26 @@ class CoursesController{
     update(req,res,next){
         const {id} = req.params;
         let data_body = {...req.body};
-        console.log(data_body);
-        res.send(id);
+
+        Course.updateOne({ _id: id },data_body)
+        .then(() => res.redirect('/me/stored/courses'))
+        .catch(next);
+        // try {
+        //     const result = await Course.updateOne({ _id: id },data_body);
+        //     console.log(result);
+        //     res.redirect('/me/stored/courses');
+        // } catch (error) {
+        //     next(error);
+        // }
+        
+    }
+    destroy(req,res,next){
+        const {id} = req.params;
+        Course.deleteOne({ _id: id })
+        .then(() => {
+            res.json({Status: true});
+        })
+        .catch(next);
     }
 }
 

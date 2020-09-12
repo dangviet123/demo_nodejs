@@ -1,5 +1,5 @@
 <div class="form-create">
-    <form method="POST" action="/courses/{{data._id}}/update">
+    <form method="POST" action="/courses/{{data._id}}/update?_method=PUT">
         <div class="form-group">
             <label>Tiêu đề</label>
             <input type="text" name="name" value="{{data.name}}" class="form-control" >

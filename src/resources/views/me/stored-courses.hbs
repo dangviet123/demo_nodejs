@@ -18,10 +18,50 @@
                 <td>{{this.updatedAt}}</td>
                 <td align="center">
                     <a href="/courses/{{this._id}}/edit" class="badge badge-primary">Chỉnh sửa</a>
-                    <a href="/courses/{{this._id}}/delete" class="badge badge-danger">Xóa</a>
+                    <a class="badge badge-danger btn" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="{{this._id}}">Xóa</a>
                 </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn chắc chắn muốn xóa dữ liệu ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">HỦY</button>
+                    <button type="button" id="delete-course" class="btn btn-primary">XÓA</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    var id = 0;
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget) // Button that triggered the modal
+        id = button.data('whatever') // Extract info from data-* attributes
+    });
+    $("#delete-course").on('click',() => {
+        $.post(`/courses/${id}/destroy?_method=DELETE`, {id},
+            function (data) {
+                if(data.Status == true){
+                    window.location.reload();
+                }
+            },
+            "json"
+        );
+    });
+</script>
